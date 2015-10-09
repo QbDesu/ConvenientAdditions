@@ -1,6 +1,7 @@
 package convenientadditions.tileentity;
 
 import convenientadditions.ConvenientAdditionsMod;
+import convenientadditions.init.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -113,7 +114,7 @@ public class TileEntityCub3dFrame extends TileEntity implements IInventory {
     
 	@Override
 	public String getInventoryName() {
-		return "inventory."+ConvenientAdditionsMod.MODID+":frame.name";
+		return "inventory."+ConvenientAdditionsMod.MODID+":"+Reference.frameBlockName+".name";
 	}
 
 	@Override
