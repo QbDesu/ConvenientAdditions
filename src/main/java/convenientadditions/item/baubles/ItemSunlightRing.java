@@ -9,15 +9,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import convenientadditions.ConvenientAdditionsMod;
-import convenientadditions.api.ItemChargable;
 import convenientadditions.api.ItemSunlightChargable;
 import convenientadditions.init.ModBlocks;
 import convenientadditions.init.ModItems;
@@ -49,23 +45,24 @@ public class ItemSunlightRing extends ItemSunlightChargable implements IBauble {
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if(player.worldObj.isRemote)
 			return;
-		
-		WorldServer world=(WorldServer)player.worldObj;
-		Random random = new Random();
-		ModItems.itemSunlightRing.chargeItem(itemstack, -1);;
-		for(int x=0;x<9;x++){
-			for(int y=0;y<9;y++){
-				for(int z=0;z<9;z++){
-					int 	x1=x-4+(int)player.posX,
-							y1=y-4+(int)player.posY,
-							z1=z-4+(int)player.posZ;
-					Block b=world.getBlock(x1, y1, z1);
-					if(b.isAir(world,x1,y1,z1)&&b!=ModBlocks.tempLightBlock){
-						world.setBlock(x1, y1, z1, ModBlocks.tempLightBlock, 0, 3);
-						world.scheduleBlockUpdate(x1, y1, z1, ModBlocks.tempLightBlock, 20+random.nextInt(20));
-					}
-        		}
-    		}
+		if(ModItems.itemSunlightRing.getCharge(itemstack)>0){
+			WorldServer world=(WorldServer)player.worldObj;
+			Random random = new Random();
+			ModItems.itemSunlightRing.chargeItem(itemstack, -1);;
+			for(int x=0;x<9;x++){
+				for(int y=0;y<9;y++){
+					for(int z=0;z<9;z++){
+						int 	x1=x-4+(int)player.posX,
+								y1=y-4+(int)player.posY,
+								z1=z-4+(int)player.posZ;
+						Block b=world.getBlock(x1, y1, z1);
+						if(b.isAir(world,x1,y1,z1)&&b!=ModBlocks.tempLightBlock){
+							world.setBlock(x1, y1, z1, ModBlocks.tempLightBlock, 0, 3);
+							world.scheduleBlockUpdate(x1, y1, z1, ModBlocks.tempLightBlock, 20+random.nextInt(20));
+						}
+	        		}
+	    		}
+			}
 		}
 	}
 
