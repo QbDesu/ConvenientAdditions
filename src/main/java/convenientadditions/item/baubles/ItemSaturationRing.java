@@ -3,25 +3,17 @@ package convenientadditions.item.baubles;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import convenientadditions.ConvenientAdditionsMod;
-import convenientadditions.api.ItemChargable;
 import convenientadditions.api.ItemSunlightChargable;
-import convenientadditions.init.ModBlocks;
-import convenientadditions.init.ModItems;
 import convenientadditions.init.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,7 +22,7 @@ public class ItemSaturationRing extends ItemSunlightChargable implements IBauble
 	public static ItemStack FULLY_CHARGED;
     
 	public ItemSaturationRing(){
-		super(5000,true,true,3);
+		super(8000,true,true,3);
 		this.setHasSubtypes(true)
 			.setUnlocalizedName(ConvenientAdditionsMod.MODID+":"+Reference.saturationRingItemName)
 			.setTextureName(ConvenientAdditionsMod.MODID+":"+Reference.saturationRingItemName)
@@ -54,12 +46,12 @@ public class ItemSaturationRing extends ItemSunlightChargable implements IBauble
 			WorldServer world=(WorldServer)player.worldObj;
 			EntityPlayer p=(EntityPlayer)player;
 			Random random = new Random();
-			if(random.nextInt(50)==0){
+			if(random.nextInt(60)==0){
 				if(p.getFoodStats().getSaturationLevel()<1.1f){
 					p.getFoodStats().setFoodSaturationLevel(p.getFoodStats().getSaturationLevel()+.12f);
 				}
 			}
-			chargeItem(itemstack, -2);
+			chargeItem(itemstack, -1);
 		}
 	}
 
