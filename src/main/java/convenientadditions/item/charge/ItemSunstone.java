@@ -1,14 +1,12 @@
 package convenientadditions.item.charge;
 
 import java.util.List;
-import java.util.Random;
 
 import conveniencecore.item.IPlayerInventoryTick;
 import conveniencecore.item.IResourceLocationProvider;
 import convenientadditions.ConvenientAdditionsMod;
 import convenientadditions.Reference;
 import convenientadditions.init.ModBlocks;
-import convenientadditions.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -90,8 +88,7 @@ public class ItemSunstone extends ItemSunlightChargeableBehaviour implements IPl
 		if(player.worldObj.isRemote)
 			return;
 		WorldServer world = (WorldServer)player.worldObj;
-		Random random = new Random();
-		if(ModItems.itemSunstone.isActive(item)){
+		if(isActive(item)){
     		consumeCharge(item, 1);
     		for(int x=0;x<9;x++){
     			for(int y=0;y<9;y++){
@@ -101,7 +98,7 @@ public class ItemSunstone extends ItemSunlightChargeableBehaviour implements IPl
     					Block b=state.getBlock();
     					if(b.isAir(state,world,pos)&&b!=ModBlocks.tempLightBlock){
     						world.setBlockState(pos, ModBlocks.tempLightBlock.getDefaultState(), 3);
-    						world.scheduleBlockUpdate(pos, ModBlocks.tempLightBlock, 20+random.nextInt(20), 0);
+    						world.scheduleBlockUpdate(pos, ModBlocks.tempLightBlock, 20+world.rand.nextInt(20), 0);
     					}
             		}
         		}
