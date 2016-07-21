@@ -10,8 +10,6 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerSetProvider extends CCContainerBase {
 	
-	public boolean isDragging;
-	
 	public TileEntitySetProvider te;
 	
 	public ContainerSetProvider(TileEntitySetProvider ent,EntityPlayer p) {
