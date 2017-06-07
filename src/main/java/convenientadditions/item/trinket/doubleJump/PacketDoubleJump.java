@@ -45,13 +45,13 @@ public class PacketDoubleJump extends PacketBase<PacketDoubleJump> {
         ItemStack stack=message.slot.getItem();
         if(stack.getItem() instanceof IDoubleJumpProvider){
             IDoubleJumpProvider item=(IDoubleJumpProvider) stack.getItem();
-            if(item.canDoubleJump(player,stack)){
+            if(item.canDoubleJump(player,stack,message.slot)){
                 player.motionY=0;
                 player.fallDistance=0;
                 player.jump();
                 ModNetworking.spawnParticle(player.world,EnumParticleTypes.CLOUD,player.posX,player.posY,player.posZ,0,0,0);
                 player.world.playSound(null,player.posX,player.posY,player.posZ, SoundEvents.BLOCK_GRASS_HIT, SoundCategory.PLAYERS,.1f,1.8f);
-                item.onDoubleJump(player,stack);
+                item.onDoubleJump(player,stack,message.slot);
             }
         }
         return null;
